@@ -1,0 +1,28 @@
+CREATE TABLE `api_comments` (
+ `comment_id` int(11) NOT NULL AUTO_INCREMENT,
+ `comment_author_id` int(11) NOT NULL,
+ `father_post_id` int(11) NOT NULL,
+ `comment_text` varchar(255) NOT NULL,
+ PRIMARY KEY (`comment_id`),
+ KEY `father_post_id` (`father_post_id`),
+ KEY `comment_author_id` (`comment_author_id`),
+ CONSTRAINT `api_comments_ibfk_1` FOREIGN KEY (`father_post_id`) REFERENCES `api_posts` (`post_id`),
+ CONSTRAINT `api_comments_ibfk_2` FOREIGN KEY (`comment_author_id`) REFERENCES `api_users` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8
+
+CREATE TABLE `api_posts` (
+ `post_id` int(11) NOT NULL AUTO_INCREMENT,
+ `post_title` varchar(100) NOT NULL,
+ `post_anons` varchar(100) NOT NULL,
+ `post_text` text NOT NULL,
+ `post_tags` varchar(100) NOT NULL,
+ `post_img` varchar(100) NOT NULL,
+ PRIMARY KEY (`post_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8
+
+CREATE TABLE `api_users` (
+ `user_id` int(11) NOT NULL AUTO_INCREMENT,
+ `user_password` varchar(25) NOT NULL,
+ `user_login` varchar(25) NOT NULL,
+ PRIMARY KEY (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8
